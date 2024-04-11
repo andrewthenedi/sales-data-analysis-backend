@@ -29,19 +29,6 @@ def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def secure_file_save(file):
-    if not file:
-        abort(400, description="No file part")
-    if file.filename == "":
-        abort(400, description="No selected file")
-    if not allowed_file(file.filename):
-        abort(400, description="File type not allowed")
-    filename = secure_filename(file.filename)
-    filepath = os.path.join("./uploads", filename)
-    file.save(filepath)
-    return filepath
-
-
 # Run the app
 if __name__ == "__main__":
     app.run(debug=True)

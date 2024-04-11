@@ -12,7 +12,7 @@ from .models import db, Order, City
 import pandas as pd
 import os
 from io import BytesIO
-from .utils import allowed_file, secure_file_save, load_and_validate_file
+from .utils import allowed_file, load_and_validate_file
 from datetime import datetime
 from flask_cors import CORS
 from sqlalchemy import func
@@ -220,7 +220,6 @@ def upload_sales_data():
         abort(400, "File type not allowed")
 
     # Save the file securely and return its path
-    filepath = secure_file_save(file)
     filepath = file.filename
     file.save(filepath)
 
